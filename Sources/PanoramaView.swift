@@ -98,6 +98,22 @@ public final class PanoramaView: UIView, SceneLoadable {
             interfaceOrientationUpdater.updateInterfaceOrientation()
         }
     }
+
+    public var controlMethod: ControlMethod = .all {
+        didSet {
+            if controlMethod.contains(.motion) && orientationNode.deviceOrientationProvider == nil  {
+                orientationNode.deviceOrientationProvider = DefaultDeviceOrientationProvider()
+            } else {
+                orientationNode.deviceOrientationProvider = nil
+            }
+
+            if controlMethod.contains(.touch)  {
+                panGestureRecognizer.isEnabled = true
+            } else {
+                panGestureRecognizer.isEnabled = false
+            }
+        }
+    }
 }
 
 extension PanoramaView: ImageLoadable {}

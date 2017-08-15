@@ -14,6 +14,15 @@ public final class OrientationNode: SCNNode {
     let deviceOrientationNode = SCNNode()
     let interfaceOrientationNode = SCNNode()
 
+    public var cameraRotationAngles: SCNVector3 {
+        get {
+            return userRotationNode.eulerAngles
+        }
+        set {
+            userRotationNode.eulerAngles = newValue
+        }
+    }
+
     public let pointOfView = SCNNode()
 
     public var deviceOrientationProvider: DeviceOrientationProvider? = DefaultDeviceOrientationProvider()
